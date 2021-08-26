@@ -13,14 +13,23 @@ namespace YTSTester
         {
             YTSClient client = new YTSClient();
 
-            var m = client.Movies.MovieSuggestions(10).Result;
+            Console.WriteLine("What movie do you want to search for?");
+            string query = Console.ReadLine();
 
-            foreach (var l in m.data.movies)
+            var results = client.Movies.ListMovies("query_term=" + query).Result;
+
+            foreach (var result in results.data.movies)
             {
-                Console.WriteLine(l.title);
+                Console.WriteLine(result.title + " (" + result.year + ") | " + result.id);
             }
-            //Console.WriteLine(m.data.movie.title);
-            //Console.WriteLine(m.data.movie.description_intro);
+
+            Console.WriteLine("Now enter the movie ID. Needs to be an integer:");
+            int id = Convert.ToInt32(Console.ReadLine());
+
+            var movie = client.Movies.MovieDetails(id).Result;
+            Console.WriteLine(movie.data.movie.title);
+            Console.WriteLine(movie.data.movie.description_full);
+
             Console.ReadLine();
         }
     }
