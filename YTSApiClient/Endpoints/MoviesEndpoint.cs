@@ -22,25 +22,26 @@ namespace YTSApiClient.Endpoints
         {
             string requestUrl = ApiHelper.ApiClient.BaseAddress + "list_movies.json?" + args;
 
-            using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(requestUrl))
-            {
-                if (response.IsSuccessStatusCode)
-                {
-                    YTSResult result = await response.Content.ReadAsAsync<YTSResult>();
-                    return result;
-                }
-                else
-                {
-                    throw new Exception(response.ReasonPhrase);
-                }
-            }
+            return await SendRequest(requestUrl);
         }
 
         public async Task<YTSResult> MovieDetails(int id, string args = "")
         {
             string requestUrl = ApiHelper.ApiClient.BaseAddress + "movie_details.json?movie_id=" + id + "&" + args;
 
-            using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(requestUrl))
+            return await SendRequest(requestUrl);
+        }
+
+        public async Task<YTSResult> MovieSuggestions(int id)
+        {
+            string requestUrl = ApiHelper.ApiClient.BaseAddress + "movie_suggestions.json?movie_id=" + id;
+
+            return await SendRequest(requestUrl);
+        }
+
+        private async Task<YTSResult> SendRequest(string url)
+        {
+            using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(url))
             {
                 if (response.IsSuccessStatusCode)
                 {
