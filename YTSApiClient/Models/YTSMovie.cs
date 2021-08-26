@@ -16,7 +16,7 @@ namespace YTSApiClient.Models
         public string title_long { get; set; }
         public string slug { get; set; }
         public int year { get; set; }
-        public int rating { get; set; }
+        public float rating { get; set; }
         public int runtime { get; set; }
         public List<string> genres { get; set; }
         public int download_count { get; set; }

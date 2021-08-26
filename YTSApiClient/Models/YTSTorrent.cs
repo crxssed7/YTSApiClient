@@ -15,7 +15,7 @@ namespace YTSApiClient.Models
         public int seeds { get; set; }
         public int peers { get; set; }
         public string size { get; set; }
-        public int size_bytes { get; set; }
+        public float size_bytes { get; set; }
         public string date_uploaded { get; set; }
         public int date_uploaded_unix { get; set; }
     }

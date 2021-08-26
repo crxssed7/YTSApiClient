@@ -9,6 +9,6 @@ namespace YTSApiClient.Models
     public class YTSData
     {
         public YTSMovie movie { get; set; }
-        public YTSMovie movies { get; set; }
+        public List<YTSMovie> movies { get; set; }
     }
 }
