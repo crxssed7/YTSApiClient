@@ -12,13 +12,12 @@ namespace YTSApiClient
     {
         public static HttpClient ApiClient { get; set; }
 
-        public static void InitClient(string token)
+        public static void InitClient()
         {
             ApiClient = new HttpClient();
             ApiClient.BaseAddress = new Uri("https://yts.mx/api/v2/");
             ApiClient.DefaultRequestHeaders.Accept.Clear();
             ApiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            ApiClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
         }
     }
 }
