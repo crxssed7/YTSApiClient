@@ -25,6 +25,13 @@ namespace YTSApiClient.Endpoints
             return await SendRequest(requestUrl);
         }
 
+        /// <summary>
+        /// Returns the details of a specific movie. Needs an ID to retrieve the movie. Can take args, in the format argname=value1&argname2=value2. 
+        /// Head over to the YTS docs to see what parameters can be used.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public async Task<YTSResult> MovieDetails(int id, string args = "")
         {
             string requestUrl = ApiHelper.ApiClient.BaseAddress + "movie_details.json?movie_id=" + id + "&" + args;
@@ -32,6 +39,11 @@ namespace YTSApiClient.Endpoints
             return await SendRequest(requestUrl);
         }
 
+        /// <summary>
+        /// Gets suggested movies for a certain movie. Needs an ID to get suggestions for.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<YTSResult> MovieSuggestions(int id)
         {
             string requestUrl = ApiHelper.ApiClient.BaseAddress + "movie_suggestions.json?movie_id=" + id;
