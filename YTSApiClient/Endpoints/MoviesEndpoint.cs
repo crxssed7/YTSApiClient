@@ -14,12 +14,31 @@ namespace YTSApiClient.Endpoints
     {
         /// <summary>
         /// Returns a list of movies. Can take args, in the format argname=value1&argname2=value2. Head over to the YTS docs to see what parameters can be used.
+        /// Use parameter "query_term" to search for a certain movie
         /// </summary>
         /// <param name="args"></param>
         /// <returns></returns>
         public async Task<YTSResult> ListMovies(string args = "")
         {
             string requestUrl = ApiHelper.ApiClient.BaseAddress + "list_movies.json?" + args;
+
+            using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(requestUrl))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    YTSResult result = await response.Content.ReadAsAsync<YTSResult>();
+                    return result;
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
+
+        public async Task<YTSResult> MovieDetails(int id, string args = "")
+        {
+            string requestUrl = ApiHelper.ApiClient.BaseAddress + "movie_details.json?movie_id=" + id + "&" + args;
 
             using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(requestUrl))
             {

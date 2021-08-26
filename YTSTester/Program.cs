@@ -13,13 +13,14 @@ namespace YTSTester
         {
             YTSClient client = new YTSClient();
 
-            var m = client.Movies.ListMovies("limit=50");
+            var m = client.Movies.MovieDetails(10).Result;
 
-            foreach (var l in m.Result.data.movies)
-            {
-                Console.WriteLine(l.title);
-            }
-
+            //foreach (var l in m.Result.data.movies)
+            //{
+            //    Console.WriteLine(l.title);
+            //}
+            Console.WriteLine(m.data.movie.title);
+            Console.WriteLine(m.data.movie.description_intro);
             Console.ReadLine();
         }
     }
